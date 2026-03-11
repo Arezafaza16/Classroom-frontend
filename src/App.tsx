@@ -16,6 +16,7 @@ import { BookOpen, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectList from "./pages/subjects/list";
 import SubjectCreate from "./pages/subjects/create";
+import { dataProvider } from "./providers/data";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <ThemeProvider>
           <DevtoolsProvider>
             <Refine
+              dataProvider={dataProvider}
               notificationProvider={useNotificationProvider()}
               routerProvider={routerProvider}
               options={{
