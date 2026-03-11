@@ -16,7 +16,7 @@ export const mockSubjects: Subject[] = [
         name: "Linear Algebra",
         department: "Mathematics",
         description:
-            "An intermediate course exploring vector spaces, matrix operations, eigenvalues, and their applications in science and engineering is very good.",
+            "An intermediate course exploring vector spaces, matrix operations, eigenvalues, and their applications in science and engineering.",
         createdAt: new Date().toISOString(),
     },
     {
