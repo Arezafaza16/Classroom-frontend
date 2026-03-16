@@ -8,11 +8,7 @@ if (!BACKEND_BASE_URL)
 
 const options: CreateDataProviderOptions = {
     getList: {
-        getEndpoint: ({resource}) => {
-            console.log(resource, "ini resource");
-            
-            return resource
-        },
+        getEndpoint: ({resource}) => resource,
         buildQueryParams: async ({resource, pagination, filters }) => {
            const page = pagination?.currentPage ?? 1;
            const pageSize = pagination?.pageSize ?? 10;
@@ -22,26 +18,26 @@ const options: CreateDataProviderOptions = {
            filters?.forEach((filter) => {
             const field = 'field' in filter ? filter.field : '';
             
+            if (filter.value == null || filter.value === '') return;
             const value = String(filter.value);
 
             if(resource === 'subjects'){
                 if(field === 'department') params.department = value;
-                if(field === 'name' || field === 'code') params.search = value;
+                if(field === 'name' || field === 'code') {
+                  params.search = params.search ? `${params.search} ${value}` : value;
+              }
             }
            })
 
            return params;
         },
         mapResponse: async (response) => {
-            console.log(response, "ini response MAP");
             
             const payload: ListResponse = await response.clone().json();
-            console.log(payload, "ini payload");
             
             return payload.data ?? [];
         },
         getTotalCount: async (response) => {
-            console.log(response, "ini response GET TOTAL COUNT");
             const payload: ListResponse = await response.clone().json();
             return payload.pagination?.total ?? payload.data?.length ?? 0;
         }
