@@ -3,6 +3,9 @@ import { ListResponse } from "@/types";
 import { createDataProvider, CreateDataProviderOptions } from "@refinedev/rest";
 
 
+if (!BACKEND_BASE_URL)
+    throw new Error("BACKEND_BASE_URL is not configured");
+
 const options: CreateDataProviderOptions = {
     getList: {
         getEndpoint: ({resource}) => {
@@ -32,14 +35,14 @@ const options: CreateDataProviderOptions = {
         mapResponse: async (response) => {
             console.log(response, "ini response MAP");
             
-            const payload: ListResponse = await response.json();
+            const payload: ListResponse = await response.clone().json();
             console.log(payload, "ini payload");
             
             return payload.data ?? [];
         },
         getTotalCount: async (response) => {
             console.log(response, "ini response GET TOTAL COUNT");
-            const payload: ListResponse = await response.json();
+            const payload: ListResponse = await response.clone().json();
             return payload.pagination?.total ?? payload.data?.length ?? 0;
         }
     }
