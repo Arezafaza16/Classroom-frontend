@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import UploadWidget from "@/components/upload-widget";
+import { UploadWidgetValue } from "@/types";
 
 const ClassesCreate = () => {
     const back = useBack();
@@ -73,7 +74,7 @@ const ClassesCreate = () => {
     ];
 
     const bannerPublicId = form.watch("bannerCldPubId");
-    const setBannerImage = ( file : any, field : any ) => {
+    const setBannerImage = (file: UploadWidgetValue | null, field: any) => {
       console.log(typeof(file),'file');
       console.log(typeof(field),'field');
       
