@@ -59,6 +59,20 @@ export interface UploadWidgetValue {
   publicId: string;
 }
 
+declare global {
+  interface Window {
+    cloudinary?: {
+      createUploadWidget: (options: object, callback: (error: unknown, result: any) => void) => CloudinaryWidget;
+    };
+  }
+}
+
+interface CloudinaryWidget {
+  open: () => void;
+  close: () => void;
+  destroy: () => void;
+}
+
 export interface UploadWidgetProps {
   value?: UploadWidgetValue | null;
   onChange?: (value: UploadWidgetValue | null) => void;
