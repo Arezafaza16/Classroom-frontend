@@ -25,7 +25,7 @@ import UploadWidget from "@/components/upload-widget";
 const ClassesCreate = () => {
     const back = useBack();
     const form = useForm<z.infer<typeof classSchema>>({
-        resolver: zodResolver(classSchema),
+        resolver: zodResolver(classSchema) as any,
         refineCoreProps: {
             resource: 'classes',
             action: 'create',
@@ -122,10 +122,10 @@ const ClassesCreate = () => {
                           </FieldLabel>
                           <UploadWidget
                             value={field.value ? { url: field.value, publicId: bannerPublicId ?? ''} : null }
-                            onChange={(file : any, field : any) => setBannerImage(file, field)}
+                            onChange={(file) => setBannerImage(file, field)}
                           />
                           <Field>
-                            {errors.bannerCldPubId && !errors.url && (
+                           {errors.bannerCldPubId && !errors.bannerUrl && (
                               <FieldError className="text-destructive text-sm">{errors.bannerCldPubId.message}</FieldError>
                             )}
                           </Field>

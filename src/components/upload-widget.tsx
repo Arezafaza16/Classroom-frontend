@@ -1,9 +1,9 @@
 import { BACKEND_BASE_URL, CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from '@/constant';
-import { UploadWidgetValue } from '@/types';
+import { UploadWidgetProps, UploadWidgetValue } from '@/types';
 import { UploadCloud } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react'
 
-const UploadWidget = ({ value = null, onChange, disabled = false}) => {
+const UploadWidget = ({ value = null, onChange, disabled = false} : UploadWidgetProps) => {
 
   const widgetRef = useRef<CloudinaryWidget | null>(null)
   const onChangeRef = useRef(onChange)
@@ -95,7 +95,7 @@ const UploadWidget = ({ value = null, onChange, disabled = false}) => {
                 <UploadCloud className='icon'/>
                 <div>
                   <p>Click to upload</p>
-                  <p>PNG, JPG, GIF up to 5MB</p>
+                  <p>PNG, JPG, WEBP up to 5MB</p>
                 </div>
               </div>
           </div>
